@@ -7,6 +7,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/secrets/app_secrets.dart';
 import 'features/auth/domain/repositories/auth_repository.dart';
+import 'features/auth/domain/use_cases/current_user.dart';
 import 'features/auth/domain/use_cases/user_sign_up.dart';
 final serviceLocator = GetIt.instance;
 
@@ -21,5 +22,6 @@ void _initAuth(){
   serviceLocator.registerFactory<AuthRepository>(() => AuthRepositoryImpl(serviceLocator()));
   serviceLocator.registerFactory(() => UserSignUp(serviceLocator()));
   serviceLocator.registerFactory(() => UserLogin(serviceLocator()));
-  serviceLocator.registerLazySingleton(() => AuthBloc(userSignUp: serviceLocator(),userLogin: serviceLocator()));
+  serviceLocator.registerFactory(() => CurrentUser(serviceLocator()));
+  serviceLocator.registerLazySingleton(() => AuthBloc(userSignUp: serviceLocator(),userLogin: serviceLocator(), currentUser: serviceLocator()));
 }
