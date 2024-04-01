@@ -1,9 +1,9 @@
 import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/core/error/failures.dart';
-import 'package:blog_app/features/auth/domain/entities/user.dart';
 
 import 'package:fpdart/src/either.dart';
 
+import '../../../../core/entities/user.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../data_sources/auth_remote_data_source.dart';
 
