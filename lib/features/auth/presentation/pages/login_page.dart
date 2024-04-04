@@ -9,6 +9,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/common/widgets/loader.dart';
+import '../../../blog/presentation/pages/blog_page.dart';
 
 class LoginPage extends StatefulWidget {
   static route() => MaterialPageRoute(builder: (context) => const LoginPage(),);
@@ -59,6 +60,8 @@ class _LoginPageState extends State<LoginPage> {
                AuthGradiantButton(buttonText: 'Log In', onTap: () {
                  if(emailController.text.isNotEmpty && passwordController.text.isNotEmpty){
                    context.read<AuthBloc>().add(AuthLogin(email: emailController.text.trim(), password: passwordController.text.trim()));
+                 }else if ( state is AuthSuccess){
+                   Navigator.pushAndRemoveUntil(context, BlogPage.route(), (route) => false,);
                  }
                  
                },),

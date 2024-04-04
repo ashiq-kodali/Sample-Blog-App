@@ -12,6 +12,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/constants/constants.dart';
+
 class AddNewBlogPage extends StatefulWidget {
   static route() => MaterialPageRoute(
         builder: (context) => const AddNewBlogPage(),
@@ -153,12 +155,7 @@ class _AddNewBlogPageState extends State<AddNewBlogPage> {
                 SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
-                    children: [
-                      'Technology',
-                      'Business',
-                      'Programming',
-                      'Entertiments'
-                    ]
+                    children: Constants.posts
                         .map(
                           (e) => Padding(
                             padding: const EdgeInsets.all(5.0),

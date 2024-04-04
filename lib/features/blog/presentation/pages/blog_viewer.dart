@@ -33,7 +33,13 @@ class BlogViewerPage extends StatelessWidget {
                   child: ClipRRect(
 
                     borderRadius: BorderRadius.circular(10),
-                    child: Image.network(blog.imageUrl,fit: BoxFit.fitWidth,),
+                    child: Image.network(blog.imageUrl,fit: BoxFit.fitWidth,
+                    frameBuilder:(context, child, frame, wasSynchronouslyLoaded) {
+                      if (frame != null) {
+                          return child;
+                        }
+                        return const Center(child: CircularProgressIndicator());
+                    },),
 
                   ),
                 ),

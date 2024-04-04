@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:blog_app/core/constants/constants.dart';
 import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/core/error/failures.dart';
 import 'package:blog_app/features/blog/data/datasources/blog_remote_data_source.dart';
@@ -29,7 +30,7 @@ class BlogRepositoryImpl implements BlogRepository {
     try{
 
       if(!await (connectionChecker.isConnected)){
-        return left(Failure('No Internet Connection '));
+        return left(Failure(Constants.noConnectionErrorMessage));
       }
       BlogModel blogModel = BlogModel(
         id: const Uuid().v1(),

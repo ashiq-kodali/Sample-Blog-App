@@ -2,9 +2,10 @@ import 'package:blog_app/core/error/exceptions.dart';
 import 'package:blog_app/core/error/failures.dart';
 import 'package:blog_app/core/network/connection_checker.dart';
 import 'package:blog_app/features/auth/data/models/user_model.dart';
+import 'package:fpdart/fpdart.dart';
 
-import 'package:fpdart/src/either.dart';
 
+import '../../../../core/constants/constants.dart';
 import '../../../../core/entities/user.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../data_sources/auth_remote_data_source.dart';
@@ -56,11 +57,12 @@ class AuthRepositoryImpl implements AuthRepository {
   ) async {
     try {
       if (!await(connectionChecker.isConnected)){
-        return left(Failure('No internet Connection'));
+        return left(Failure(Constants.noConnectionErrorMessage));
       }
       final user = await fn();
       return right(user);
-    } on ServerException catch (e) {
+    }
+    on ServerException catch (e) {
       return left(Failure(e.message));
     }
   }

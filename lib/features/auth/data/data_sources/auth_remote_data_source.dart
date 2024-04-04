@@ -32,10 +32,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
   Future<UserModel> loginWithEmailPassword({required String email, required String password})async {
     try{
       final response = await supabaseClient.auth.signInWithPassword(password: password,email: email);
-      if (response == null){
-        throw const ServerException('User is Null');
+      if (response.user == null){
+        throw const ServerException('User Not Exist');
       }
       return UserModel.fromJson(response.user!.toJson());
+    }on AuthException catch(e){
+      throw ServerException(e.message);
+
     }catch(e){
       throw  ServerException(e.toString());
     }
@@ -45,11 +48,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
   Future<UserModel> signUpWithEmailPassword({required String name, required String email, required String password}) async{
     try{
       final response = await supabaseClient.auth.signUp(password: password,email: email,data: {'name': name});
-      if (response == null){
+      if (response.user == null){
         throw const ServerException('User is Null');
       }
       return UserModel.fromJson(response.user!.toJson());
-    }catch(e){
+    }on AuthException catch(e){
+      throw ServerException(e.message);
+
+    } catch(e){
       throw  ServerException(e.toString());
     }
 
