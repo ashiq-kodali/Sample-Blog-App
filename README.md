@@ -1,6 +1,6 @@
 # blog_app
 
-Implement Clean Arch | Bloc | Supabase | Hive
+Implement Clean Arch | Bloc | Supabase | Hive | get_it| fp_dart|
 
 ## Getting Started
 
